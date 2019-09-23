@@ -1,18 +1,45 @@
-import Square from "./square";
+import Square from './square.js'
+import Point from './point.js'
 
 export default class Cube {
 	constructor(square) {
-		this.frontFace = square;
-		this.createFaces();
+		this.frontFace = square
+		this.createFaces()
+		this.faces = [
+			this.backFace,
+			this.leftFace,
+			this.rightFace,
+			this.topFace,
+			this.bottomFace,
+			this.frontFace
+		]
+	}
 
+	render() {
+		this.faces.sort((a, b) => b.averageZ() - a.averageZ())
+		this.faces.forEach(face => {
+			face.render()
+		})
 	}
 
 	createFaces() {
 		this.backFace = new Square(
-			Point.translate(square.topLeft, 0, 0, square.edgeSize()),
-			Point.translate(square.topRight, 0, 0, square.edgeSize()),
-			Point.translate(square.bottomLeft, 0, 0, square.edgeSize()),
-			Point.translate(square.bottomRight, 0, 0, square.edgeSize())
+			Point.translateZ(
+				this.frontFace.topLeft,
+				this.frontFace.edgeSize()
+			),
+			Point.translateZ(
+				this.frontFace.topRight,
+				this.frontFace.edgeSize()
+			),
+			Point.translateZ(
+				this.frontFace.bottomLeft,
+				this.frontFace.edgeSize()
+			),
+			Point.translateZ(
+				this.frontFace.bottomRight,
+				this.frontFace.edgeSize()
+			)
 		)
 
 		this.leftFace = new Square(
