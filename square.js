@@ -1,6 +1,7 @@
 import Edge from './edge.js'
 import context from './index.js'
 import Point from './point.js'
+import randomColor from './randomColor.js'
 
 export default class Square {
 	constructor(topLeft, topRight, bottomLeft, bottomRight) {
@@ -18,11 +19,18 @@ export default class Square {
 	}
 
 	averageZ() {
+		console.log(
+			(this.topLeft.z +
+				this.topRight.z +
+				this.bottomLeft.z +
+				this.bottomRight.z) /
+				4
+		)
 		return (this.topLeft.z + this.topRight.z + this.bottomLeft.z + this.bottomRight.z) / 4
 	}
 
 	static createFromSize(topLeft, size) {
-		return new Square(topLeft, Point.translate(topLeft, size, 0, 0), Point.translate(topLeft, size, 0, 0), Point.translate(topLeft, size, size, 0))
+		return new Square(topLeft, Point.translate(topLeft, size, 0, 0), Point.translate(topLeft, 0, size, 0), Point.translate(topLeft, size, size, 0))
 	}
 
 	edgeSize() {
@@ -36,12 +44,18 @@ export default class Square {
 	}
 
 	render() {
-		context.beginPath()
 		context.strokeStyle = '#000000'
-		this.edges.forEach(edge => edge.render())
-		context.stroke()
+		context.fillStyle = randomColor()
+		context.lineWidth = 1
+		context.lineJoin = context.lineCap = 'round'
+		context.beginPath()
+		context.moveTo(this.topLeft.x, this.topLeft.y)
+		context.lineTo(this.topRight.x, this.topRight.y)
+		context.lineTo(this.bottomRight.x, this.bottomRight.y)
+		context.lineTo(this.bottomLeft.x, this.bottomLeft.y)
+		context.lineTo(this.topLeft.x, this.topLeft.y)
 		context.closePath()
-		context.fillStyle = '#F5F5F5'
+		context.stroke()
 		context.fill()
 	}
 }

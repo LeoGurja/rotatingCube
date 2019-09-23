@@ -7,10 +7,10 @@ export default class Cube {
 		this.createFaces()
 		this.faces = [
 			this.backFace,
+			this.bottomFace,
 			this.leftFace,
 			this.rightFace,
 			this.topFace,
-			this.bottomFace,
 			this.frontFace
 		]
 	}
@@ -24,20 +24,28 @@ export default class Cube {
 
 	createFaces() {
 		this.backFace = new Square(
-			Point.translateZ(
+			Point.translate(
 				this.frontFace.topLeft,
+				50,
+				-50,
 				this.frontFace.edgeSize()
 			),
-			Point.translateZ(
+			Point.translate(
 				this.frontFace.topRight,
+				50,
+				-50,
 				this.frontFace.edgeSize()
 			),
-			Point.translateZ(
+			Point.translate(
 				this.frontFace.bottomLeft,
+				50,
+				-50,
 				this.frontFace.edgeSize()
 			),
-			Point.translateZ(
+			Point.translate(
 				this.frontFace.bottomRight,
+				50,
+				-50,
 				this.frontFace.edgeSize()
 			)
 		)
@@ -60,7 +68,7 @@ export default class Cube {
 			this.frontFace.topLeft,
 			this.frontFace.topRight,
 			this.backFace.topLeft,
-			this.backFace.bottomRight
+			this.backFace.topRight
 		)
 
 		this.bottomFace = new Square(
