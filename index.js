@@ -11,8 +11,8 @@ export default context
 
 const myCube = new Cube(Square.createFromSize(new Point(150, 150, 0), 150))
 setInterval(() => {
-	context.clearRect(0, 0, canvas.width, canvas.height)
-	myCube.update()
-	myCube.render()
+    context.clearRect(0, 0, canvas.width, canvas.height)
+    myCube.update()
+    myCube.render()
 }, 5)
 console.log(myCube)
