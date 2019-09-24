@@ -20,17 +20,13 @@ export default class Point {
 	}
 
 	rotate(dx, dy, dz) {
-		this.y = Math.cos(dx * Math.PI / 180) * this.y - Math.sin(dx * Math.PI / 180) * this.z
-		this.z = Math.sin(dx * Math.PI / 180) * this.y + Math.cos(dx * Math.PI / 180) * this.z
+		this.y = Math.cos(dx) * this.y - Math.sin(dx) * this.z
+		this.z = Math.sin(dx) * this.y + Math.cos(dx) * this.z
 
-		this.x = Math.cos(dy * Math.PI / 180) * this.x + Math.sin(dy * Math.PI / 180) * this.z
-		this.z = Math.cos(dy * Math.PI / 180) * this.z - Math.sin(dy * Math.PI / 180) * this.x
+		this.x = Math.cos(dy) * this.x + Math.sin(dy) * this.z
+		this.z = Math.cos(dy) * this.z - Math.sin(dy) * this.x
 
-		this.x = Math.cos(dz * Math.PI / 180) * this.x - Math.sin(dz * Math.PI / 180) * this.y
-		this.y = Math.sin(dz * Math.PI / 180) * this.x + Math.cos(dz * Math.PI / 180) * this.y
-	}
-
-	distance(point) {
-		return Math.sqrt((this.x - point.x) ** 2 + (this.y - point.y) ** 2 + (this.z - point.z) ** 2)
+		this.x = Math.cos(dz) * this.x - Math.sin(dz) * this.y
+		this.y = Math.sin(dz) * this.x + Math.cos(dz) * this.y
 	}
 }
