@@ -1,9 +1,12 @@
 import Square from './square.js'
 import Point from './point.js'
+import { canvas } from './index.js'
+import randomColor from './randomColor.js'
 
 export default class Cube {
 	constructor(square) {
 		this.frontFace = square
+		this.speed = [2, 2]
 		this.createFaces()
 		this.faces = [
 			this.backFace,
@@ -15,10 +18,40 @@ export default class Cube {
 		]
 	}
 
+	update() {
+		this.faces.forEach(face => face.update(this.speed))
+		this.collide()
+	}
+
 	render() {
 		this.faces.sort((a, b) => b.averageZ() - a.averageZ())
 		this.faces.forEach(face => {
 			face.render()
+		})
+	}
+
+	collide() {
+		let changed = false
+		this.faces.forEach((face) => {
+			face.points.forEach((point) => {
+				if (point.x <= 0) {
+					this.speed[0] = Math.abs(this.speed[0])
+					changed = true
+				}
+				if (point.x >= canvas.width) {
+					this.speed[0] = Math.abs(this.speed[0]) * -1
+					changed = true
+				}
+				if (point.y <= 0) {
+					this.speed[1] = Math.abs(this.speed[1])
+					changed = true
+				}
+				if (point.y >= canvas.height) {
+					this.speed[1] = Math.abs(this.speed[1]) * -1
+					changed = true
+				}
+			})
+			if (changed) face.color = randomColor()
 		})
 	}
 

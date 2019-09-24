@@ -10,12 +10,17 @@ export default class Square {
 		this.bottomLeft = bottomLeft
 		this.bottomRight = bottomRight
 		this.points = [this.topLeft, this.topRight, this.bottomLeft, this.bottomRight]
+		this.color = randomColor()
 
 		this.topEdge = new Edge(this.topLeft, this.topRight)
 		this.rightEdge = new Edge(this.topRight, this.bottomRight)
 		this.bottomEdge = new Edge(this.bottomRight, this.bottomLeft)
 		this.leftEdge = new Edge(this.bottomLeft, this.topLeft)
 		this.edges = [this.topEdge, this.rightEdge, this.bottomEdge, this.leftEdge]
+	}
+
+	update(speed) {
+		this.points.forEach(point => point.translate(speed[0], speed[1], 0))
 	}
 
 	averageZ() {
@@ -37,15 +42,9 @@ export default class Square {
 		return this.topLeft.distance(this.topRight)
 	}
 
-	isInside() {
-		// TODO: is inside square
-		// const vector1 = this.topEdge.getVector()
-		// const vector2 = this.leftEdge.getVector()
-	}
-
 	render() {
 		context.strokeStyle = '#000000'
-		context.fillStyle = randomColor()
+		context.fillStyle = this.color
 		context.lineWidth = 1
 		context.lineJoin = context.lineCap = 'round'
 		context.beginPath()

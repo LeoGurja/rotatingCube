@@ -1,6 +1,5 @@
 html,
-body,
-canvas {
+body {
 	width: 100vh;
 	height: 100vh;
 	margin: 0;
