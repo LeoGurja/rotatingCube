@@ -5,7 +5,7 @@ import { canvas } from './index.js'
 export default class Cube {
 	constructor(pos, size) {
 		this.frontFace = Face.createFromSize(new Point(-size / 2, -size / 2, -size / 2), size)
-		this.speed = [2, 2, 0]
+		this.speed = [Math.random() * 5 + 2, Math.random() * 5 + 2, 0]
 		this.pos = pos
 		this.collided = false
 		this.rotateSpeed = [0.1, 0.1, 0.1]
